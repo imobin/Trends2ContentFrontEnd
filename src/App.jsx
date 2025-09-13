@@ -1,29 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Route, Routes } from "react-router";
+import HomePage from "./Pages/HomePage";
+import PostDetails from "./Pages/PostDetails";
+import Nave from "./components/Nave";
+import Footer from "./components/Footer";
+import LoginPage from "./Pages/loginPage";
+import { AppProvider, useAppContext } from "./context/AppContext";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {recipes, setRecipes, getRecipes} = useAppContext()
 
   return (
     <div>
-    <div className="card bg-base-100 w-96 shadow-sm">
-  <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes" />
-  </figure>
-  <div className="card-body">
-    <h2 className="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+      <Nave />
+      <Routes>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/postDetails" element={<PostDetails />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<p>No Information found!</p>} />
+      </Routes>
+      <Footer />
     </div>
-  </div>
-</div>
-    </div>
-  )
+  );
 }
 
-export default App
+export default App;
