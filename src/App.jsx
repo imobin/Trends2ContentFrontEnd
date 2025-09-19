@@ -14,6 +14,7 @@ import axios from "axios";
 import UserDashBoard from "./Pages/UserDashBoard";
 import ProtectionComponent from "./components/ProtectionComponent";
 import Register from "./Pages/Register";
+import Allmypost from "./Pages/Allmypost";
 
 function App() {
   const { allPost, setSelected, Selected  } = useAppContext();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/userdashboard" element={<ProtectionComponent />}>
         <Route index element={<UserDashBoard />} />
+        <Route path="allPosts" element={<Allmypost />} />
         </Route>
         <Route path="*" element={<p>No Information found!</p>} />
       </Routes>

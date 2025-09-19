@@ -22,6 +22,7 @@ export const AppProvider = ({ children }) => {
   const [selected, setSelected] = useState([])
   const [AIres, setAIres] = useState({title: "", content:[], category:""})
   const [auth, setauth] = useState(false)
+  const [userID, setuserID] = useState()
   // const [token, settoken] = useState();
   useEffect(() => {
     const getAllPost = async () => {
@@ -67,7 +68,7 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{ allPost, selectedPost, setselectedPost, logout, isJWT, 
         rankedListAllTime, setrankListAllTime, rankedListRising, setrankListRising, 
-        setSelected, selected, AIres, setAIres, auth, setauth }}
+        setSelected, selected, AIres, setAIres, auth, setauth, userID, setuserID }}
     >
       {children}
     </AppContext.Provider>

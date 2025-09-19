@@ -2,12 +2,15 @@ import axios from "axios";
 import React, { useRef } from "react";
 import { useAppContext } from "../context/AppContext";
 import KeywordResutls from "../components/KeywordResutls";
+import { Link } from "react-router";
 
 export default function UserDashBoard() {
   const { rankedListAllTime, setrankListAllTime } = useAppContext();
-  const { rankedListRising, setrankListRising, setSelected, selected, AIres, setAIres } = useAppContext();
+  const { rankedListRising, setrankListRising, setSelected, selected, AIres, setAIres, userID, setuserID } = useAppContext();
   const content = useRef(null);
   const title = useRef(null);
+  const token = localStorage.getItem("token")
+  console.log("form dashboard:", `Bearer ${token}`)
   function TrendSearch(e) {
     e.preventDefault();
     const keyword = {
@@ -33,7 +36,7 @@ console.log("from dash",selected);
       .post('http://localhost:3000/generatePost', {keyword : selected})
       .then((i) => {
         const parsed = JSON.parse(i.data)
-        console.log(parsed);
+        // console.log(parsed);
         setAIres(parsed)
         // setselectedPost(i.data);
         // console.log(eventList);
@@ -43,7 +46,32 @@ console.log("from dash",selected);
       });
  }
  function publish(){
-  alert(content.current.textContent)
+  const postpub = {
+      title: title.current.textContent,
+      content: content.current.textContent,
+      UserId: userID,
+      CategoryId: 2,
+    }
+    // console.log("hi",postpub)
+    // alert(postpub.CategoryId)
+    axios
+      .post('http://localhost:3000/creatPost', postpub, {
+    headers: {
+      Authorization: `Bearer ${token}}`,
+    }
+  })
+      .then((i) => {
+        console.log("Hi from publish", i.data)
+        // const parsed = JSON.parse(i.data)
+        // console.log(parsed);
+        // setAIres(parsed)
+        // setselectedPost(i.data);
+        // console.log(eventList);
+      })
+      .catch((i) => {
+        console.log("from catch2",i);
+      });
+
  }
 
   return (
@@ -114,6 +142,9 @@ console.log("from dash",selected);
               </li>
               <li>
                 <button onClick={AIContentGen}> Use AI to Create Conent with selelct queries</button>
+              </li>
+              <li>
+                <Link to={"allPosts"}>All my posts</Link>
               </li>
             </ul>
           </div>

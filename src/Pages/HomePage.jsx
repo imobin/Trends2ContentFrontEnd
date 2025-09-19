@@ -8,7 +8,7 @@ export default function HomePage() {
     const { allPost } = useAppContext();
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 px-4">
         {allPost.map((i, k) => <PostCard postObj = {i}/>)}
     </div>
   );

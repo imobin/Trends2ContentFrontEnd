@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext";
 export default function LoginPage() {
   const { auth, setauth } = useAppContext();  
   //   console.log(token);
-  const { isJWT } = useAppContext();
+  const { isJWT, userID, setuserID } = useAppContext();
   const token = localStorage.getItem("token")
   console.log("from login",token)
   const navigate = useNavigate(); 
@@ -36,13 +36,14 @@ export default function LoginPage() {
           alert("Username or Password is worng!")
         }
       });
-
+      const getUserID = { username: e.target.username.value }
       axios
-      .get("http://localhost:3000/user", longInfo)
-      .then((i) => {
-        console.log("userID:", i.data)
+      .post("http://localhost:3000/user", getUserID)
+      .then((j) => {
+        console.log("useID form login:", j.data)
+        localStorage.setItem("userID:", j.data)
+        setuserID(j.data)
       });
-
   }
 
   return (
