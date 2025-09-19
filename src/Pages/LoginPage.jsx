@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { data, useNavigate } from "react-router";
+import { data, Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 export default function LoginPage() {
@@ -29,13 +29,20 @@ export default function LoginPage() {
       .then((i) => {
         if(isJWT(i.data)){
           localStorage.setItem("token", i.data)
-          setauth(!auth)
+          setauth(true)
           alert(`${username} welcome to your profile!`)
           navigate("/userdashboard");
         } else{
           alert("Username or Password is worng!")
         }
       });
+
+      axios
+      .get("http://localhost:3000/user", longInfo)
+      .then((i) => {
+        console.log("userID:", i.data)
+      });
+
   }
 
   return (
@@ -45,11 +52,6 @@ export default function LoginPage() {
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:text-left">
               <h1 className="text-5xl font-bold">Login now!</h1>
-              <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                assumenda excepturi exercitationem quasi. In deleniti eaque aut
-                repudiandae et a id nisi.
-              </p>
             </div>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
               <div className="card-body">
@@ -69,7 +71,7 @@ export default function LoginPage() {
                     name="password"
                   />
                   <div>
-                    <a className="link link-hover">Forgot password?</a>
+                    <Link to={"/register"} className="link link-hover">Don't have an account yet?</Link>
                   </div>
                   <button className="btn btn-neutral mt-4">Login</button>
                 </fieldset>

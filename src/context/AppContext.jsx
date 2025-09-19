@@ -45,7 +45,7 @@ export const AppProvider = ({ children }) => {
 
  function logout(){
   localStorage.removeItem("token")
-  setauth(!auth)
+  setauth(false)
  }
 
 //  function AIContentGen(){
@@ -62,11 +62,12 @@ export const AppProvider = ({ children }) => {
 //  }
 
 
+
   return (
     <AppContext.Provider
       value={{ allPost, selectedPost, setselectedPost, logout, isJWT, 
         rankedListAllTime, setrankListAllTime, rankedListRising, setrankListRising, 
-        setSelected, selected, AIres, setAIres, auth, setauth}}
+        setSelected, selected, AIres, setAIres, auth, setauth }}
     >
       {children}
     </AppContext.Provider>

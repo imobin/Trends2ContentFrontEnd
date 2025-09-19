@@ -1,11 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useRef } from "react";
 import { useAppContext } from "../context/AppContext";
 import KeywordResutls from "../components/KeywordResutls";
 
 export default function UserDashBoard() {
   const { rankedListAllTime, setrankListAllTime } = useAppContext();
   const { rankedListRising, setrankListRising, setSelected, selected, AIres, setAIres } = useAppContext();
+  const content = useRef(null);
+  const title = useRef(null);
   function TrendSearch(e) {
     e.preventDefault();
     const keyword = {
@@ -40,6 +42,9 @@ console.log("from dash",selected);
         console.log("from catch",i);
       });
  }
+ function publish(){
+  alert(content.current.textContent)
+ }
 
   return (
     <div>
@@ -70,11 +75,13 @@ console.log("from dash",selected);
   <div className="card bg-base-300 rounded-box grid h-120 place-items-start">
     <h1 contentEditable
     suppressContentEditableWarning={true}
-    onBlur={(e) => console.log("New title:", e.target.innerText)}>{AIres.title}</h1>
+    onBlur={(e) => console.log("New title:", e.target.innerText)} ref={title} >{AIres.title}</h1>
     <p contentEditable
     suppressContentEditableWarning={true}
-    onBlur={(e) => console.log("New title:", e.target.innerText)}>{AIres.content.map(p => p).join("")}</p>
+    onBlur={(e) => console.log("New title:", e.target.innerText)} ref={content}>{AIres.content.map(p => p).join("")}</p>
+    
   </div>
+  <button className="btn btn-primary" onClick={publish}>Publish</button>
 </div>
             <label
               htmlFor="my-drawer-2"
