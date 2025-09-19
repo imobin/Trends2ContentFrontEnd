@@ -12,10 +12,12 @@ import { AppProvider, useAppContext } from "./context/AppContext";
 import { useEffect } from "react";
 import axios from "axios";
 import UserDashBoard from "./Pages/UserDashBoard";
+import ProtectionComponent from "./components/ProtectionComponent";
 
 function App() {
-  const { allPost } = useAppContext();
-  console.log(allPost);
+  const { allPost, setSelected, Selected  } = useAppContext();
+
+  
 
   return (
     <div>
@@ -24,7 +26,9 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/postDetails/:id" element={<PostDetails />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/userdashboard" element={<UserDashBoard />} />
+        <Route path="/userdashboard" element={<ProtectionComponent />}>
+        <Route index element={<UserDashBoard />} />
+        </Route>
         <Route path="*" element={<p>No Information found!</p>} />
       </Routes>
       <Footer />

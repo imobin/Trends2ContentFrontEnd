@@ -5,10 +5,10 @@ import { data, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 export default function LoginPage() {
+  const { auth, setauth } = useAppContext();  
   //   console.log(token);
   const { isJWT } = useAppContext();
   const token = localStorage.getItem("token")
-  
   console.log("from login",token)
   const navigate = useNavigate(); 
   // useEffect(() => {
@@ -29,6 +29,7 @@ export default function LoginPage() {
       .then((i) => {
         if(isJWT(i.data)){
           localStorage.setItem("token", i.data)
+          setauth(!auth)
           alert(`${username} welcome to your profile!`)
           navigate("/userdashboard");
         } else{

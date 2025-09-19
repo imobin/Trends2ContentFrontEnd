@@ -17,6 +17,11 @@ export const AppProvider = ({ children }) => {
     cover: "",
     CategoryId: "",
   });
+  const [rankedListAllTime, setrankListAllTime] = useState([])
+  const [rankedListRising, setrankListRising] = useState([])
+  const [selected, setSelected] = useState([])
+  const [AIres, setAIres] = useState({title: "", content:[], category:""})
+  const [auth, setauth] = useState(false)
   // const [token, settoken] = useState();
   useEffect(() => {
     const getAllPost = async () => {
@@ -40,11 +45,28 @@ export const AppProvider = ({ children }) => {
 
  function logout(){
   localStorage.removeItem("token")
+  setauth(!auth)
  }
+
+//  function AIContentGen(){
+//   axios
+//       .post(`http://localhost:3000/generatePost`)
+//       .then((i) => {
+//         console.log(i.data);
+//         // setselectedPost(i.data);
+//         // console.log(eventList);
+//       })
+//       .catch((i) => {
+//         console.log("from catch",i);
+//       });
+//  }
+
 
   return (
     <AppContext.Provider
-      value={{ allPost, selectedPost, setselectedPost, logout, isJWT}}
+      value={{ allPost, selectedPost, setselectedPost, logout, isJWT, 
+        rankedListAllTime, setrankListAllTime, rankedListRising, setrankListRising, 
+        setSelected, selected, AIres, setAIres, auth, setauth}}
     >
       {children}
     </AppContext.Provider>
