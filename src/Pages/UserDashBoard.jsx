@@ -57,11 +57,11 @@ console.log("from dash",selected);
     axios
       .post('http://localhost:3000/creatPost', postpub, {
     headers: {
-      Authorization: `Bearer ${token}}`,
+      Authorization: `Bearer ${token}`,
     }
   })
       .then((i) => {
-        console.log("Hi from publish", i.data)
+        alert(i.data)
         // const parsed = JSON.parse(i.data)
         // console.log(parsed);
         // setAIres(parsed)

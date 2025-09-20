@@ -9,7 +9,7 @@ export default function HomePage() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 px-4">
-        {allPost.map((i, k) => <PostCard postObj = {i}/>)}
+        {allPost.map((i, k) => <PostCard index={k} postObj = {i}/>)}
     </div>
   );
 }

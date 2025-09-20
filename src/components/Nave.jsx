@@ -18,11 +18,11 @@ export default function Nave() {
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
+        <li>{token && (<button className="btn btn-neutral" onClick={logout}>Logout</button>)}</li>
       <li>
         {token ? <Link to={"/userdashboard"}>User dashboard</Link>: <Link to={"/login"}>Login/Register</Link>}
         </li>
-        <li>{token && (<button className="btn btn-neutral" onClick={logout}>Logout</button>)}</li>
-      <li>
+      {/* <li>
         <details>
           <summary>Categories</summary>
           <ul className="bg-base-100 rounded-t-none p-2">
@@ -30,7 +30,7 @@ export default function Nave() {
             <li><Link to={"/"}>test2</Link> </li>
           </ul>
         </details>
-      </li>
+      </li> */}
     </ul>
   </div>
 </div>

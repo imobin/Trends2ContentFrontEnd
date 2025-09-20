@@ -7,7 +7,7 @@ export default function PostCard({ postObj }) {
       <div className="card bg-base-100 w-96 shadow-sm">
         <div className="card-body">
           <h2 className="card-title">{postObj.title}</h2>
-          {/* <p>{postObj.userId}</p> */}
+          <p>Created by UserID: {postObj.UserId}</p>
           <div className="card-actions justify-end">
             <Link to={`/postDetails/${postObj.id}`}>
             <button className="btn btn-primary">More</button>

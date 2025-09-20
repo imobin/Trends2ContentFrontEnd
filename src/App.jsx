@@ -15,6 +15,7 @@ import UserDashBoard from "./Pages/UserDashBoard";
 import ProtectionComponent from "./components/ProtectionComponent";
 import Register from "./Pages/Register";
 import Allmypost from "./Pages/Allmypost";
+import PostDetailsEdit from "./Pages/PostDetailsEdit";
 
 function App() {
   const { allPost, setSelected, Selected  } = useAppContext();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/userdashboard" element={<ProtectionComponent />}>
         <Route index element={<UserDashBoard />} />
         <Route path="allPosts" element={<Allmypost />} />
+        <Route path="postDetailsEdit/:id" element={<PostDetailsEdit />} />
         </Route>
         <Route path="*" element={<p>No Information found!</p>} />
       </Routes>
