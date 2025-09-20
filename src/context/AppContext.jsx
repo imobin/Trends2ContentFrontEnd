@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const AppContext = createContext();
 
@@ -24,18 +24,8 @@ export const AppProvider = ({ children }) => {
   const [auth, setauth] = useState(false)
   const [userID, setuserID] = useState()
   // const [token, settoken] = useState();
-  useEffect(() => {
-    const getAllPost = async () => {
-      try {
-        const thePosts = await axios.get("http://localhost:3000/home/");
-        // setallPost(allPost)
-        setallPost(thePosts.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllPost();
-  }, []);
+  // const location = useLocation();
+  
 
  function isJWT(token) {
   if (typeof token !== "string") return false
@@ -47,6 +37,7 @@ export const AppProvider = ({ children }) => {
  function logout(){
   localStorage.removeItem("token")
   setauth(false)
+  window.location.reload();
  }
 
 //  function AIContentGen(){
@@ -62,11 +53,17 @@ export const AppProvider = ({ children }) => {
 //       });
 //  }
 
+useEffect(() => {
+  const token = localStorage.getItem("token")
+  if(isJWT(token)){
+            setauth(true)
+    } 
+}, [])
 
 
   return (
     <AppContext.Provider
-      value={{ allPost, selectedPost, setselectedPost, logout, isJWT, 
+      value={{ allPost, setallPost, selectedPost, setselectedPost, logout, isJWT, 
         rankedListAllTime, setrankListAllTime, rankedListRising, setrankListRising, 
         setSelected, selected, AIres, setAIres, auth, setauth, userID, setuserID }}
     >

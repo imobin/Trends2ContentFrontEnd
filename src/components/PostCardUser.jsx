@@ -17,6 +17,7 @@ export default function PostCardUser({ postObjUser, token }) {
               .catch((i) => {
                 console.log("from catch2",i);
               });
+              
     }
   return (
     <div>
